@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if menu %}{{ menu.name }}{% else %}Выбор продуктов{% endif %}
+{% endblock %}
+
+{% block content %}
+  <div id="sidebar">
+    <h3>Варианты меню</h3>
+    <ul>
+      <li {% if not menu %}class="selected"{% endif %}>
+        <a href="{% url 'kitchen:choice_list' %}">Все</a>
+      </li>
+      {% for c in menus %}
+        <li {% if menu.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div id="main" class="choice_list">
+    <h1>{% if menu %}{{ menu.name }}{% else %}Выбор продуктов{% endif %}</h1>
+    {% for choice in wide_choice %}
+      <div class="item">
+        <a href="{{ choice.get_absolute_url }}">
+          <img src="{% if choice.image %}{{ choice.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <a href="{{ choice.get_absolute_url }}">{{ choice.name }}</a><br>
+        ${{ choice.price }}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
