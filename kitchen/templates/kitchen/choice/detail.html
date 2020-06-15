@@ -10,8 +10,12 @@
     <img src="{% if choice.image %}{{ choice.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
     <h1>{{ choice.name }}</h1>
     <h2><a href="{{ choice.menu.get_absolute_url }}">{{ choice.menu }}</a></h2>
-    <p class="price">руб.{{ choice.price }}</p>
-
+    <p class="price">{{ choice.price }} руб.</p>
+    <form action="{% url "cart:cart_add" choice.id %}" method="post">
+      {{ cart_choice_form }}
+      {% csrf_token %}
+      <input type="submit" value="Добавить в корзину">
+    </form>
     {{ choice.description|linebreaks }}
   </div>
 {% endblock %}

@@ -27,7 +27,7 @@
           <img src="{% if choice.image %}{{ choice.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
         </a>
         <a href="{{ choice.get_absolute_url }}">{{ choice.name }}</a><br>
-        руб.{{ choice.price }}
+        {{ choice.price }} руб.
       </div>
     {% endfor %}
   </div>
