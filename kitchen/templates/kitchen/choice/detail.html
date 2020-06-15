@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ choice.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="choice-detail">
+    <img src="{% if choice.image %}{{ choice.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+    <h1>{{ choice.name }}</h1>
+    <h2><a href="{{ choice.menu.get_absolute_url }}">{{ choice.menu }}</a></h2>
+    <p class="price">руб.{{ choice.price }}</p>
+
+    {{ choice.description|linebreaks }}
+  </div>
+{% endblock %}
