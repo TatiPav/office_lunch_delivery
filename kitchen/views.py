@@ -12,6 +12,4 @@ def choice_list(request, menu_slug=None):
 
 def choice_detail(request, id, slug):
     choice = get_object_or_404(Choice, id=id, slug=slug, available=True)
-    return render(request,
-                  'kitchen/choice/detail.html',
-                  {'choice': choice})
+    return render(request, 'kitchen/choice/detail.html', {'choice': choice})
